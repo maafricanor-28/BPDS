@@ -1,2 +1,2 @@
-TEST PARA BPDS MAC AFRICANO
 
+Buenas Prácticas en Desarrollo de Software. Universidad de la Costa MAC AFRICANO 4TO SEMESTRE. En esta materia vemos manera estandarizadas para un buen desarrollo de software y controles de versiones con GIT Y GITHUB
