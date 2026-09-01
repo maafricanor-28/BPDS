@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi todo List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="todo-container">
+        <h1>MI TODO LIST</h1>
+
+        <div class="input-area">
+            <input type="text" id="taskInput" placeholder="Escribe una tarea...">
+            <div class="input-hint">
+                Presiona <strong>Enter</strong> para agregar una tarea
+            </div>
+        </div>
+
+        <div id="taskList"></div>
+
+        <p>
+            Completadas:
+            <span id="CompleteCount">0</span>
+            de
+            <span id="totalCount">0</span>
+        </p>
+
+        <button id="DeleteCompleteBtn">Eliminar Completadas</button>
+    </main>
+
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div id="editModal" class="modal-box hidden">
+            <div class="modal-header">
+                <h3>Editar tarea</h3>
+                <button class="close-btn">×</button>
+            </div>
+            <input type="text" id="editTaskInput">
+            <div class="modal-actions">
+                <button class="btn-cancel">Cancelar</button>
+                <button id="saveEditBtn" class="btn-save">Guardar</button>
+            </div>
+        </div>
+
+        <div id="deleteModal" class="modal-box hidden">
+            <div class="modal-header">
+                <h3>Eliminar tarea</h3>
+                <button class="close-btn">×</button>
+            </div>
+            <p>¿Seguro que quieres eliminar esta tarea?</p>
+            <div class="modal-actions">
+                <button class="btn-cancel">Cancelar</button>
+                <button id="confirmDeleteBtn" class="btn-delete">Eliminar</button>
+            </div>
+        </div>
+
+        <div id="deleteCompletedModal" class="modal-box hidden">
+            <div class="modal-header">
+                <h3>Eliminar completadas</h3>
+                <button class="close-btn">×</button>
+            </div>
+            <p>¿Seguro que quieres eliminar todas las tareas completadas?</p>
+            <div class="modal-actions">
+                <button class="btn-cancel">Cancelar</button>
+                <button id="confirmDeleteCompletedBtn" class="btn-delete">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
