@@ -273,3 +273,10 @@ body {
 .hidden {
     display: none !important;
 }
+
+/* Mejora de accesibilidad visual en elementos interactivos con el tabulador */
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
