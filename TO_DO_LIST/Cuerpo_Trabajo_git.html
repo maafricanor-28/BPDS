@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Configuración básica de la página -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi todo List</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <main class="todo-container">
+    <main class="todo-container"> <!-- <main> representa el contenido principal de la página.
+             class="todo-container" le da un nombre al contenedor
+             para poder aplicarle estilos desde CSS -->
+
         <h1>MI TODO LIST</h1>
 
         <div class="input-area">
-            <input type="text" id="taskInput" placeholder="Escribe una tarea...">
+            <!-- Entrada principal para registrar nuevas tareas -->
+            <input type="text" id="taskInput" placeholder="Escribe una tarea...">  
+
             <div class="input-hint">
                 Presiona <strong>Enter</strong> para agregar una tarea
             </div>
@@ -21,15 +27,18 @@
 
         <p>
             Completadas:
+                        <!-- Contador actualizado según las tareas completadas -->
             <span id="CompleteCount">0</span>
             de
+            <!-- Contador que refleja la cantidad total de tareas -->
             <span id="totalCount">0</span>
         </p>
 
         <button id="DeleteCompleteBtn">Eliminar Completadas</button>
     </main>
-
+<!-- Contenedor general que JavaScript utiliza para mostrar u ocultar los modales -->
     <div id="modalOverlay" class="modal-overlay hidden">
+        <!-- ventana para editar una tarea existente-->
         <div id="editModal" class="modal-box hidden">
             <div class="modal-header">
                 <h3>Editar tarea</h3>
@@ -38,6 +47,7 @@
             <input type="text" id="editTaskInput">
             <div class="modal-actions">
                 <button class="btn-cancel">Cancelar</button>
+                 <!-- Confirma y guarda los cambios realizados en la tarea -->
                 <button id="saveEditBtn" class="btn-save">Guardar</button>
             </div>
         </div>
@@ -62,6 +72,7 @@
             <p>¿Seguro que quieres eliminar todas las tareas completadas?</p>
             <div class="modal-actions">
                 <button class="btn-cancel">Cancelar</button>
+                <!-- Confirma la eliminación de todas las tareas marcadas como completadas -->
                 <button id="confirmDeleteCompletedBtn" class="btn-delete">Eliminar</button>
             </div>
         </div>
