@@ -16,7 +16,8 @@
 
         <div class="input-area">
             <!-- Entrada principal para registrar nuevas tareas -->
-            <input type="text" id="taskInput" placeholder="Escribe una tarea...">  
+            <label for="taskInput">Nueva tarea</label>
+            <input type="text" id="taskInput" placeholder="Escribe una tarea...">
 
             <div class="input-hint">
                 Presiona <strong>Enter</strong> para agregar una tarea
@@ -34,46 +35,60 @@
             <span id="totalCount">0</span>
         </p>
 
-        <button id="DeleteCompleteBtn">Eliminar Completadas</button>
+        <button type="button" id="DeleteCompleteBtn">Eliminar Completadas</button>
+        <button type="button" id="ShowDeleteBtn">Ver tareas eliminadas</button>
     </main>
 <!-- Contenedor general que JavaScript utiliza para mostrar u ocultar los modales -->
     <div id="modalOverlay" class="modal-overlay hidden">
         <!-- ventana para editar una tarea existente-->
-        <div id="editModal" class="modal-box hidden">
+        <div id="editModal" class="modal-box hidden" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
             <div class="modal-header">
-                <h3>Editar tarea</h3>
-                <button class="close-btn">×</button>
+                <h3 id="editModalTitle">Editar tarea</h3>
+                <button type="button" class="close-btn" aria-label="Cerrar">×</button>
             </div>
+            <label for="editTaskInput">Texto de la tarea</label>
             <input type="text" id="editTaskInput">
             <div class="modal-actions">
-                <button class="btn-cancel">Cancelar</button>
+                <button type="button" class="btn-cancel">Cancelar</button>
                  <!-- Confirma y guarda los cambios realizados en la tarea -->
-                <button id="saveEditBtn" class="btn-save">Guardar</button>
+                <button type="button" id="saveEditBtn" class="btn-save">Guardar</button>
             </div>
         </div>
 
-        <div id="deleteModal" class="modal-box hidden">
+        <div id="deleteModal" class="modal-box hidden" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
             <div class="modal-header">
-                <h3>Eliminar tarea</h3>
-                <button class="close-btn">×</button>
+                <h3 id="deleteModalTitle">Eliminar tarea</h3>
+                <button type="button" class="close-btn" aria-label="Cerrar">×</button>
             </div>
             <p>¿Seguro que quieres eliminar esta tarea?</p>
             <div class="modal-actions">
-                <button class="btn-cancel">Cancelar</button>
-                <button id="confirmDeleteBtn" class="btn-delete">Eliminar</button>
+                <button type="button" class="btn-cancel">Cancelar</button>
+                <button type="button" id="confirmDeleteBtn" class="btn-delete">Eliminar</button>
             </div>
         </div>
 
-        <div id="deleteCompletedModal" class="modal-box hidden">
+        <div id="deleteCompletedModal" class="modal-box hidden" role="dialog" aria-modal="true" aria-labelledby="deleteCompletedModalTitle">
             <div class="modal-header">
-                <h3>Eliminar completadas</h3>
-                <button class="close-btn">×</button>
+                <h3 id="deleteCompletedModalTitle">Eliminar completadas</h3>
+                <button type="button" class="close-btn" aria-label="Cerrar">×</button>
             </div>
             <p>¿Seguro que quieres eliminar todas las tareas completadas?</p>
             <div class="modal-actions">
-                <button class="btn-cancel">Cancelar</button>
+                <button type="button" class="btn-cancel">Cancelar</button>
                 <!-- Confirma la eliminación de todas las tareas marcadas como completadas -->
-                <button id="confirmDeleteCompletedBtn" class="btn-delete">Eliminar</button>
+                <button type="button" id="confirmDeleteCompletedBtn" class="btn-delete">Eliminar</button>
+            </div>
+        </div>
+
+        <div id="deletedModal" class="modal-box hidden" role="dialog" aria-modal="true" aria-labelledby="deletedModalTitle">
+            <div class="modal-header">
+                <h3 id="deletedModalTitle">Tareas eliminadas</h3>
+                <button type="button" class="close-btn" aria-label="Cerrar">×</button>
+            </div>
+            <!-- Aquí JavaScript colocará las tareas eliminadas. -->
+            <div id="deletedTaskList"></div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel">Cerrar</button>
             </div>
         </div>
     </div>
