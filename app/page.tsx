@@ -247,7 +247,7 @@ export default function Home() {
               </div>
             </div>
           )}
-          
+
           {modal === 'listDeleteTasks' && (
             <div id="deletedModal" className={styles.deletedModal} role="dialog" aria-modal="true" aria-labelledby="deletedModalTitle">
               <div id="modal-header" className={styles.modalHeader}>
