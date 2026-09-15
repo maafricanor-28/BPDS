@@ -10,7 +10,7 @@ type Task = {
   completada: boolean;
 };
 
-type Modal = 'edit' | 'delete' | 'deleteCompleted' | null;
+type Modal = 'edit' | 'delete' | 'deleteCompleted' | 'listDeleteTasks' | null;
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -180,6 +180,13 @@ export default function Home() {
       >
         Eliminar Completadas
       </button>
+      <button
+        className={styles.ShowDeleteBtn}
+        onClick={() => setModal('listDeleteTasks')}
+        disabled={tasks.length === 0}
+      >
+        Ver tareas eliminadas
+      </button>
 
       {modal && (
         <div className={styles.modalOverlay} role="presentation">
@@ -237,6 +244,21 @@ export default function Home() {
                 <button className={styles.btnDelete} onClick={deleteCompletedTasks}>
                   Eliminar
                 </button>
+              </div>
+            </div>
+          )}
+          
+          {modal === 'listDeleteTasks' && (
+            <div id="deletedModal" className={styles.deletedModal} role="dialog" aria-modal="true" aria-labelledby="deletedModalTitle">
+              <div id="modal-header" className={styles.modalHeader}>
+                  <h3 id="deletedModalTitle">Tareas eliminadas</h3>
+                  <button type="button" id="close-btn" className={styles.closeBtn} aria-label="Cerrar">
+                    ×
+                  </button>
+              </div>
+              <div id="deletedTaskList" className={styles.deletedTaskList}></div>
+              <div id="modal-actions" className={styles.modalActions}>
+                  <button type="button" id="btn-cancel" className={styles.btnCancel}>Cerrar</button>
               </div>
             </div>
           )}
