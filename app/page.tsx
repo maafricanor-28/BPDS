@@ -14,6 +14,7 @@ type Modal = 'edit' | 'delete' | 'deleteCompleted' | 'listDeleteTasks' | null;
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [deletedTasks, setDeletedTasks] = useState<Task[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [taskText, setTaskText] = useState('');
   const [modal, setModal] = useState<Modal>(null);
@@ -22,25 +23,36 @@ export default function Home() {
 
   useEffect(() => {
     const storedTasks = window.localStorage.getItem('todo_tasks');
+    const storedDeletedTasks = window.localStorage.getItem('todo_deleted_tasks');
 
-    if (!storedTasks) {
-      setIsLoaded(true);
-      return;
+    if (storedTasks) {
+      try {
+        setTasks(JSON.parse(storedTasks) as Task[]);
+      } catch {
+        window.localStorage.removeItem('todo_tasks');
+      }
     }
 
-    try {
-      setTasks(JSON.parse(storedTasks) as Task[]);
-    } catch {
-      window.localStorage.removeItem('todo_tasks');
+    if (storedDeletedTasks) {
+      try {
+        setDeletedTasks(JSON.parse(storedDeletedTasks) as Task[]);
+      } catch {
+        window.localStorage.removeItem('todo_deleted_tasks');
+      }
     }
+
     setIsLoaded(true);
   }, []);
 
   useEffect(() => {
-    if (!isLoaded) return;
+  if (!isLoaded) return;
 
-    window.localStorage.setItem('todo_tasks', JSON.stringify(tasks));
-  }, [isLoaded, tasks]);
+  window.localStorage.setItem('todo_tasks', JSON.stringify(tasks));
+  window.localStorage.setItem(
+    'todo_deleted_tasks',
+    JSON.stringify(deletedTasks),
+  );
+}, [isLoaded, tasks, deletedTasks]);
 
   function addTask() {
     const texto = taskText.trim();
@@ -84,16 +96,42 @@ export default function Home() {
   function deleteTask() {
     if (selectedTaskId === null) return;
 
-    setTasks((currentTasks) =>
-      currentTasks.filter((task) => task.id !== selectedTaskId),
-    );
-    closeModal();
-  }
+  const taskToDelete = tasks.find(
+    (task) => task.id === selectedTaskId,
+  );
+
+  if (!taskToDelete) return;
+
+  setDeletedTasks((currentDeletedTasks) => [
+    ...currentDeletedTasks,
+    taskToDelete,
+  ]);
+
+  setTasks((currentTasks) =>
+    currentTasks.filter((task) => task.id !== selectedTaskId),
+  );
+
+  closeModal();
+}
 
   function deleteCompletedTasks() {
-    setTasks((currentTasks) => currentTasks.filter((task) => !task.completada));
-    closeModal();
+  const completedTasks = tasks.filter(
+    (task) => task.completada,
+  );
+
+  if (completedTasks.length > 0) {
+    setDeletedTasks((currentDeletedTasks) => [
+      ...currentDeletedTasks,
+      ...completedTasks,
+    ]);
+
+    setTasks((currentTasks) =>
+      currentTasks.filter((task) => !task.completada),
+    );
   }
+
+  closeModal();
+}
 
   function closeModal() {
     setModal(null);
@@ -183,7 +221,7 @@ export default function Home() {
       <button
         className={styles.ShowDeleteBtn}
         onClick={() => setModal('listDeleteTasks')}
-        disabled={tasks.length === 0}
+        disabled={deletedTasks.length === 0}
       >
         Ver tareas eliminadas
       </button>
@@ -252,13 +290,23 @@ export default function Home() {
             <div id="deletedModal" className={styles.deletedModal} role="dialog" aria-modal="true" aria-labelledby="deletedModalTitle">
               <div id="modal-header" className={styles.modalHeader}>
                   <h3 id="deletedModalTitle">Tareas eliminadas</h3>
-                  <button type="button" id="close-btn" className={styles.closeBtn} aria-label="Cerrar">
+                  <button type="button" id="close-btn" className={styles.closeBtn} onClick={closeModal} aria-label="Cerrar">
                     ×
                   </button>
               </div>
-              <div id="deletedTaskList" className={styles.deletedTaskList}></div>
+              <div id="deletedTaskList" className={styles.deletedTaskList}>
+                {deletedTasks.length === 0 ? (
+                  <p>No hay tareas eliminadas.</p>
+                ) : (
+                  deletedTasks.map((task) => (
+                    <div key={task.id}>
+                      {task.texto}
+                    </div>
+                  ))
+                )}
+              </div>
               <div id="modal-actions" className={styles.modalActions}>
-                  <button type="button" id="btn-cancel" className={styles.btnCancel}>Cerrar</button>
+                  <button type="button" id="btn-cancel" className={styles.btnCancel} onClick={closeModal}>Cerrar</button>
               </div>
             </div>
           )}
