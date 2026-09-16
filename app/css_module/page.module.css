@@ -323,7 +323,21 @@ input:focus-visible {
     max-height: 300px;
     overflow-y: auto;
     margin: 8px 0 20px;
-    padding: 4px;
+    padding: 12px;
+    background-color: #f8fafc;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+}
+
+.emptyDeletedState {
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--color-text-light);
+    background-color: #ffffff;
+    border: 1px dashed var(--color-border);
+    border-radius: 10px;
+    text-align: center;
 }
 
 /*Cada tarea que javascript agregue al historial*/
@@ -332,21 +346,20 @@ input:focus-visible {
     font-size: 15px;
     line-height: 1.4;
     color: var(--color-text-light);
-    background-color: #f8fafc;
+    background-color: #ffffff;
     border: 1px solid var(--color-border);
     border-left: 4px solid var(--color-danger);
     border-radius: 10px;
     word-break: break-word;
 }
 
-/*Botón cerrar del modal de tareas eliminadas*/
-.deletedModal .btn-cancel {
-    min-width: 100px;
+.deletedModal .btnCancel {
+    min-width: 110px;
     transition: background-color 0.2s ease,
                 border-color 0.2s ease;
 }
 
-.deletedModal .btn-cancel:hover {
+.deletedModal .btnCancel:hover {
     background-color: #f3f4f6;
     border-color: #d1d5db;
 }
