@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Mi todo list
 
-## Getting Started
+Aplicación web de lista de tareas desarrollada con Nexts.js, React y Typescript.
 
-First, run the development server:
+## 📌 Descripción 
+Esta aplicación permite gestionar tareas de manera sencilla. Ek usuario puede agregar, editar, completar y eliminarr tareas.
+Como nueva funcionalidad, se implementó una **papelera de tareas eliminadas**, donde se almacenan las tareas antes de desaparecer de la lista principal.
 
+## 🌐 Funcionalidades principales 
+- Agrega tareas.
+- Edita tareas.
+- Marca tareas como completadas.
+- Eliminar tareas.
+- Eliminar todas las tareas completadas.
+- Consulta las tareas eliminadas mediante la papelera.
+
+## 🆕 Papelera de tareas eliminadas
+Cuando una tarea es eliminada, se lamacena en la lista **Tareas eliminadas** antes de desaparecer de la lista principal.
+
+También se almacenan en la papelera las tareas eliminadas mediante la opción **Eliminar completadas**.
+
+La papelera puede consultarse mediante el botón: **"Ver tareas eliminadas"**
+
+## 🛠️ Tecnologías utilizadas
+-Next.js
+-React
+-TypeScript
+-CSS
+-localStorage
+
+## 🚀Instalación
+Clonar el repositorio y entrar en la carpeta del proyecto.
+
+Instalar las dependencias:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
+## Integrantes 
+- Mac Africano Restrepo
+- Carlos Monroy Vázquez
+- Vidal Niebles Cáceres
+- Mateo Pérez Núñez
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📸 Capturas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Listas principal
+![Lista principal](public/screenshots/todo-list.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Tareas eliminadas
+![Tareas eliminadas](public/screenshots/papelera.png)
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Equipo
+![Equipo](public/screenshots/integrantes.png)
